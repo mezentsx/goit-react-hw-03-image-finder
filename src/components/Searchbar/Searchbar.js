@@ -3,8 +3,7 @@ import s from "./Searchbar.module.css";
 
 class Searchbar extends Component {
   state = {
-    imageName: "",
-    searchInput: "",
+    imageName: ""
   };
 
   handleNameChange = (e) => {
