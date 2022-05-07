@@ -1,12 +1,17 @@
 import React from "react";
 import s from "./ImageGalleryItem.module.css";
+import PropTypes from "prop-types";
 
-const ImageGalleryItem = (props) => {
+const ImageGalleryItem = ({
+  id,
+  webformatURL,
+  tags,
+  largeImageURL,
+  onClick,
+}) => {
   const onImageClick = () => {
-    props.onClick(props.largeImageURL, props.tags);
+    onClick(largeImageURL, tags);
   };
-
-  const { id, webformatURL, tags } = props;
 
   return (
     <li className={s.ImageGalleryItem}>
@@ -22,3 +27,11 @@ const ImageGalleryItem = (props) => {
 };
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+};

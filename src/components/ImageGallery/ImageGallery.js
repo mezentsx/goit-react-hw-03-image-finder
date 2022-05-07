@@ -3,13 +3,12 @@ import s from "./ImageGallery.module.css";
 import ImageGalleryItem from "../ImageGalleryItem";
 import Button from "../Button";
 import Spinner from "../Loader";
+import PropTypes from "prop-types";
 
-const ImageGallery = (props) => {
+const ImageGallery = ({ error, gallery, status, onLoadMore, onClick }) => {
   const onImageClick = (imageURL, alt) => {
-    props.onClick(imageURL, alt);
+    onClick(imageURL, alt);
   };
-
-  const { error, gallery, status, onLoadMore } = props;
 
   if (status === "idle") {
     return <p className={s.text}>Enter keyword for image search</p>;
@@ -42,3 +41,11 @@ const ImageGallery = (props) => {
 };
 
 export default ImageGallery;
+
+ImageGallery.propTypes = {
+  onLoadMore: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  gallery: PropTypes.array.isRequired,
+  status: PropTypes.string.isRequired,
+};
