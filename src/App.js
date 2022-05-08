@@ -59,7 +59,7 @@ class App extends Component {
   };
 
   onOpenModal = (url, alt) => {
-    this.setState({ largeImageURL: url, alt: alt });
+    this.setState({ largeImageURL: url, imageAlt: alt });
     this.toggleModal();
   };
 
