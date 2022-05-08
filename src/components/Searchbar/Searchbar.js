@@ -2,23 +2,19 @@ import React, { Component } from "react";
 import s from "./Searchbar.module.css";
 
 class Searchbar extends Component {
-  state = {
-    imageName: ""
-  };
-
   handleNameChange = (e) => {
-    this.setState({ imageName: e.currentTarget.value.toLowerCase() });
+    this.props.onSearch(e.currentTarget.value.toLowerCase());
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.state.imageName.trim() === "") {
+    if (this.props.search.trim() === "") {
       alert("Enter keyword please");
       return;
     }
 
-    this.props.onSubmit(this.state.imageName);
-    this.setState({ imageName: "" });
+    this.props.onSubmit(this.props.search);
+    this.props.onSearch("");
   };
 
   render() {
@@ -34,7 +30,7 @@ class Searchbar extends Component {
             type="text"
             autoComplete="off"
             autoFocus
-            value={this.setState.imageName}
+            value={this.props.search}
             onChange={this.handleNameChange}
             placeholder="Search images and photos"
           />

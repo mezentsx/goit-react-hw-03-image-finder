@@ -23,6 +23,7 @@ class App extends Component {
     largeImageURL: "",
     imageAlt: "",
     error: null,
+    search: "",
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -64,12 +65,21 @@ class App extends Component {
       showModal: !showModal,
     }));
   };
+
+  updateData = (value) => {
+    this.setState({ search: value });
+  };
+
   render() {
     const { largeImageURL, error, gallery, status, showModal, imageAlt } =
       this.state;
     return (
       <>
-        <Searchbar onSubmit={this.handleFormSubmit}></Searchbar>
+        <Searchbar
+          onSubmit={this.handleFormSubmit}
+          onSearch={this.updateData}
+          search={this.state.search}
+        ></Searchbar>
         <ImageGallery
           status={status}
           error={error}
