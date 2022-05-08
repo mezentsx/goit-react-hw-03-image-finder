@@ -46,6 +46,6 @@ ImageGallery.propTypes = {
   onLoadMore: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   error: PropTypes.string,
-  gallery: PropTypes.array.isRequired,
+  gallery: PropTypes.node.isRequired,
   status: PropTypes.string.isRequired,
 };
