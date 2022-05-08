@@ -97,9 +97,9 @@ class App extends Component {
           gallery={gallery}
           onClick={this.onOpenModal}
         />
-        {totalHits !== gallery.length && (
+        {totalHits !== gallery.length && 
           <Button onLoadMore={this.onLoadMore}></Button>
-        )}
+        }
         {showModal && (
           <Modal closeModal={this.toggleModal}>
             <img src={largeImageURL} alt={imageAlt} />
