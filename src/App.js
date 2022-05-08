@@ -5,6 +5,7 @@ import fetchImage from "./utility/Api";
 import Searchbar from "./components/Searchbar";
 import ImageGallery from "./components/ImageGallery";
 import Modal from "./components/Modal";
+import Button from "./components/Button";
 
 const Status = {
   IDLE: "idle",
@@ -24,6 +25,7 @@ class App extends Component {
     imageAlt: "",
     error: null,
     search: "",
+    totalHits: 0,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -46,6 +48,7 @@ class App extends Component {
           gallery: [...gallery, ...data.hits],
           status: Status.RESOLVED,
           page: page + 1,
+          totalHits: data.totalHits,
         }));
       })
       .catch((error) => this.setState({ error, status: Status.REJECTED }));
@@ -71,22 +74,32 @@ class App extends Component {
   };
 
   render() {
-    const { largeImageURL, error, gallery, status, showModal, imageAlt } =
-      this.state;
+    const {
+      search,
+      largeImageURL,
+      error,
+      gallery,
+      status,
+      showModal,
+      imageAlt,
+      totalHits,
+    } = this.state;
     return (
       <>
         <Searchbar
           onSubmit={this.handleFormSubmit}
           onSearch={this.updateData}
-          search={this.state.search}
-        ></Searchbar>
+          search={search}
+        />
         <ImageGallery
           status={status}
           error={error}
           gallery={gallery}
           onClick={this.onOpenModal}
-          onLoadMore={this.onLoadMore}
-        ></ImageGallery>
+        />
+        {totalHits !== gallery.length && (
+          <Button onLoadMore={this.onLoadMore}></Button>
+        )}
         {showModal && (
           <Modal closeModal={this.toggleModal}>
             <img src={largeImageURL} alt={imageAlt} />

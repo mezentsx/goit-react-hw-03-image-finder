@@ -1,11 +1,10 @@
 import React from "react";
 import s from "./ImageGallery.module.css";
 import ImageGalleryItem from "../ImageGalleryItem";
-import Button from "../Button";
 import Spinner from "../Loader";
 import PropTypes from "prop-types";
 
-const ImageGallery = ({ error, gallery, status, onLoadMore, onClick }) => {
+const ImageGallery = ({ error, gallery, status, onClick }) => {
   const onImageClick = (imageURL, alt) => {
     onClick(imageURL, alt);
   };
@@ -21,21 +20,18 @@ const ImageGallery = ({ error, gallery, status, onLoadMore, onClick }) => {
   }
   if (status === "resolved") {
     return (
-      <>
-        <ul className={s.ImageGallery}>
-          {gallery.map(({ id, tags, webformatURL, largeImageURL }) => (
-            <ImageGalleryItem
-              id={id}
-              key={id}
-              tags={tags}
-              webformatURL={webformatURL}
-              largeImageURL={largeImageURL}
-              onClick={onImageClick}
-            />
-          ))}
-        </ul>
-        <Button onLoadMore={onLoadMore}>Load more</Button>
-      </>
+      <ul className={s.ImageGallery}>
+        {gallery.map(({ id, tags, webformatURL, largeImageURL }) => (
+          <ImageGalleryItem
+            id={id}
+            key={id}
+            tags={tags}
+            webformatURL={webformatURL}
+            largeImageURL={largeImageURL}
+            onClick={onImageClick}
+          />
+        ))}
+      </ul>
     );
   }
 };
@@ -43,7 +39,6 @@ const ImageGallery = ({ error, gallery, status, onLoadMore, onClick }) => {
 export default ImageGallery;
 
 ImageGallery.propTypes = {
-  onLoadMore: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   error: PropTypes.string,
   gallery: PropTypes.array.isRequired,
